@@ -3,6 +3,8 @@ import Todos from "../Todos/Todos";
 import AddTodo from "../Todos/AddTodo";
 import uuid from "../../../node_modules/uuid";
 import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 class TodoPage extends Component {
   state = {
@@ -37,7 +39,7 @@ class TodoPage extends Component {
   };
 
   render() {
-    console.log("Hej Edvin, här är this.props: ", this.props);
+    console.log("Render in TodoPage: ", this.props);
 
     return (
       <div>
@@ -60,14 +62,35 @@ are attached to the props of this component. So then we can access them
 inside this comopnent.  
 */
 const mapStateToProps = state => {
+  console.log("state mate inside mapstate in TodoPage", state);
   return {
-    todos: state.todo.todos
+    todos: state.firestore.ordered.todos || state.todo.todos
   };
 };
 
-/* Vi slänger in mapStateToProps som parameter till connect så connectfunktionen
+/* Vi slänger in mapStateToProps som parameter till connect så connect-funktionen
 vet vad den ska connecta till, vilken data den ska hämta från store. Vi mappar det 
 till våran props objekt här inne (this.props). Så nu har vi tillgång till 
 props.todo i denna component och vi får datan. 
+
+
 */
-export default connect(mapStateToProps)(TodoPage);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    {
+      collection: "todos"
+    }
+  ])
+)(TodoPage);
+/* What happens here /\: When this component is active the collection 
+ that we want to listen to is the todos collection. And whenever this 
+ component first loads or whenever the firestore data is changed in the
+ database online, this will now induce the firestore reducer to sync this
+ store state (rootReducer) with that todos collection in firestore.
+ So now whenever the database changes. This component will hear that 
+ because we're connected to that collection and in turn it will trigger
+ the firestore reducer to update the state to reflect that change. 
+
+ 
+ */

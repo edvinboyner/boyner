@@ -12,8 +12,6 @@ But with thunk we can do something else instead!
 
 */
 
-import { firestore } from "firebase";
-
 /* dispatch: dispatches an action to the reducer 
 So what we are doing here: 
 When we first call an action creator inside a dispatch method from our 
@@ -24,12 +22,13 @@ because we're not returning an action anymore; just a function.
 
 // We are pausing the dispatch
 export const createTodo = todo => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
+  return (dispatch, getState, { getFirestore }) => {
     // We'll make async call to the database
 
     const fireStore = getFirestore(); //This gives us a reference to our firestore database
-    firestore
-      .CollectionReference("todos")
+    console.log("Inside todoActions- todo: ", todo);
+    fireStore
+      .collection("todos")
       .add({
         ...todo
       })

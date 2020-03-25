@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { connect } from "react-redux";
-import { logoutUser } from "../../store/actions";
-import Header from "../layout/Header";
-import About from "./About";
-import ContactUs from "./ContactUs";
-import Links from "./Links";
-import Olandsbron from "./NileCity";
-import TodoPage from "./TodoPage";
+
 import Notifications from "../layout/Notifications";
 import ProjectList from "../projects/ProjectList";
-import ProjectDetails from "../projects/ProjectDetails";
+import { firestoreConnect } from "react-redux-firebase";
 
 class Home extends Component {
   // checkParent = (parent, child) => {

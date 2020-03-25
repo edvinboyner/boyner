@@ -10,7 +10,8 @@ class TodoItem extends Component {
     };
   };
   render() {
-    const { title, id } = this.props.todo;
+    console.log("TodoItem this.props.todo: ", this.props.todo);
+    const { id, title } = this.props.todo;
     return (
       <div style={this.getStyle()}>
         <p>
