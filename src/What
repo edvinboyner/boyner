@@ -1,0 +1,18 @@
+Boyner-träd
+Nummer
+Dagböcker
+Info om varje medlem
+Bilder
+
+
+Login med uppgiter eller som gäst.
+Gäst ska inte ha tillgång till allt. 
+
+
+                        App.js
+                    /            \
+                Sign in         Guest
+                /                   \
+            Home.js(user)        Home.js(guest)
+
+Kolla redux guide

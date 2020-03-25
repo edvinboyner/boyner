@@ -1,0 +1,66 @@
+Reducers - specify how the application's state changes in response to
+actions sent to the store. Remember that actions only describe what 
+happened, but don't describe how the application's state changes.
+
+Vi har olika reducers men samlar alla via rootReducer där vi använder combineReducer
+
+---------------------------------------------------------------------------
+Store holds the whole state tree of your application. 
+The only way to change the state inside it is to dispatch an action on it.
+A store is not a class. It's just an object with a few methods on it.
+To create it, pass your root reducing function to createStore.
+
+I configureStore.js skapar vi storen. I Root.js kör vi configureStore
+för att underlätta så vi slipper skriva så mkt kod i configureStore.
+Läs mer i filerna.
+
+----------------------------------------------------------
+
+I slutet av vissa klasser kör vi connect(). Detta är en funktion
+som returnerar en komponent med högre ordning som tar in det som är i ().
+
+----------------------------------------------------------------------------
+
+mapStateToProps:
+
+This function takes in the state of our store (we have access to that).
+Then we return an object and this object is going to represent which properties
+are attached to the props of this component. So then we can access them 
+inside this comopnent.  
+
+----------------------------------------------------------------------------
+
+Action:
+We dispatch an action and this calls an action creator to generate that 
+creator. Redux thunk will allow us not to return an action creator but
+to return a function. Inside that function we can halt the dispatch. 
+We pause it for a second. Then we perform an asynchronous request 
+(like, go grab some data or update some data). Then we can resume
+the dispatch and pass it to the reducer once this async requerst has
+been completed.
+
+So: The component will still dispatch an action nas normal and call an 
+action creator as normal, but inside the action creator thats where
+we halt the process we return a function instead of an action, like we 
+normally would, and then we go out and grab data (or update or whatever)
+then resume the dispatch and pass it to the reduce of the action. 
+
+-------------------------------------------------------------------------------
+this could take in a list of middleware.
+it turns into a store enhancer so we could add many different middlewares
+inside here and we could also have many different store enhancers here.
+And they enhance the store functionality. 
+We have now applied this tunkMiddleware which is now enchancing our
+store with extra functionality, that functionality now being that we 
+can return a function inside our action creators which can then
+interact with a database. 
+
+-----------------------------------------------------------------------------
+
+Firestore is a no SQL database and it deals with collection and documents.
+Collection: is a collection of documents that belong together 
+(for example on our project a collection would be Todos and in that Todos-collection
+we would have a series of different documents and each one of these documents
+would be a single todoItem. )
+Document: Looks very much like a JS object. It has key value pairs.
+The key could be a title and the value would be a string.
