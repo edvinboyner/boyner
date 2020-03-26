@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import TodoItem from "../layout/TodoItem";
+import DeleteTodo from "./DeleteTodo";
 
 class Todos extends Component {
   render() {
-    console.log("this is Todos this.props.todo: ", this.props);
+    // console.log("this is Todos this.props.todo: ", this.props);
     return (
       this.props &&
       this.props.todo.todos.map(todo => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onDelete={this.props.onDelete}
-          onToggle={this.props.onToggle}
-        />
+        <React.Fragment>
+          <DeleteTodo onDelete={this.props.onDelete} />
+          <TodoItem key={todo.id} todo={todo} onToggle={this.props.onToggle} />
+        </React.Fragment>
       ))
     );
   }

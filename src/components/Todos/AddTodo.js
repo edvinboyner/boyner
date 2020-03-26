@@ -11,7 +11,7 @@ class AddTodo extends Component {
   onSubmit = e => {
     e.preventDefault();
     // this is gonna pass this.state to the createTodo in the bottom of this component
-    console.log("AddTodo inside", this.state);
+    // console.log("AddTodo inside", this.state);
     this.props.createTodo(this.state);
 
     // this.props.addTodo(this.state.title);
@@ -51,7 +51,7 @@ call this action creator right here in which we imported at the top.
 That is going to return the function in "todoActions". 
 */
 const mapDispatchToProps = dispatch => {
-  console.log("2: inside mapDispatchToProps - dispatch ", dispatch);
+  // console.log("2: inside mapDispatchToProps - dispatch ", dispatch);
   return {
     createTodo: todo => dispatch(createTodo(todo))
   };

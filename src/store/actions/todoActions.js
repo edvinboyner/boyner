@@ -26,11 +26,13 @@ export const createTodo = todo => {
     // We'll make async call to the database
 
     const fireStore = getFirestore(); //This gives us a reference to our firestore database
-    console.log("Inside todoActions- todo: ", todo);
+    // console.log("Inside todoActions- todo: ", todo);
     fireStore
       .collection("todos")
       .add({
-        ...todo
+        ...todo,
+
+        completed: false
       })
       .then(() => {
         // When we done /\ we carry on with the dispatch: (.then() makes sure we are done b4 doing this \/)
@@ -41,7 +43,26 @@ export const createTodo = todo => {
       });
   };
 };
+export default createTodo;
+
+export const deleteTodo = todo => {
+  return (dispatch, getState, { getFirestore }) => {
+    // We'll make async call to the database
+    console.log("todoActions ", todo);
+    const fireStore = getFirestore(); //This gives us a reference to our firestore database
+    // console.log("Inside todoActions- todo: ", todo);
+    fireStore
+      .collection("todos")
+      .doc(todo.id)
+      .delete()
+      .then(() => {
+        // When we done /\ we carry on with the dispatch: (.then() makes sure we are done b4 doing this \/)
+        dispatch({ type: "DELETE_TODO", todo: todo });
+      })
+      .catch(err => {
+        dispatch({ type: "CREATE_TODO_ERROR", err });
+      });
+  };
+};
 
 /* AddTodo --> skickar state --> todoActions --> dispatchar och tas emot --> todoReducer(kollar vad för action.type o gör något sjukt */
-
-export default createTodo;
