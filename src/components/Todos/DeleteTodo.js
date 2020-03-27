@@ -4,20 +4,29 @@ import { deleteTodo } from "../../store/actions/todoActions";
 
 class DeleteTodo extends Component {
   onClick = id => {
-    console.log("Testing ID: ", id[0]);
-    this.props.deleteTodo(id[0]);
+    console.log("ID: ", id);
+
+    this.props.deleteTodo(id); //-- This would delete the first object of the list. But I want a the object linked to the delete button to be removed.
   };
 
   render() {
+    const todos = this.props.todos.slice();
+    console.log("todos mate: ", todos);
+    console.log(todos.sort((a, b) => a.title.localeCompare(b.title)));
+
     return (
-      //   <button onClick={this.onClick} style={btnStyle}>
-      <button
-        onClick={() => this.onClick(this.props.todos)}
-        // onClick={this.onClick.bind(this, this.props.id)}
-        style={btnStyle}
-      >
-        x
-      </button>
+      <div>
+        <ul>
+          {todos.map(item => (
+            <li>
+              <span>{item.title}</span>
+              <button onClick={() => this.onClick(item.id)} style={btnStyle}>
+                x
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }

@@ -53,7 +53,7 @@ export const deleteTodo = todo => {
     // console.log("Inside todoActions- todo: ", todo);
     fireStore
       .collection("todos")
-      .doc(todo.id)
+      .doc(todo)
       .delete()
       .then(() => {
         // When we done /\ we carry on with the dispatch: (.then() makes sure we are done b4 doing this \/)
