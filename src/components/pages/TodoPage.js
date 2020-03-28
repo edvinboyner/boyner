@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import Todos from "../Todos/Todos";
 import AddTodo from "../Todos/AddTodo";
 import uuid from "../../../node_modules/uuid";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import TodoItem from "../Todos/TodoItem";
-import ToggleTodos from "../Todos/ToggleTodos";
 
 class TodoPage extends Component {
   render() {
@@ -17,11 +15,6 @@ class TodoPage extends Component {
         <AddTodo addTodo={this.addTodo} />
         {/* <ToggleTodos /> */}
         <TodoItem />
-        {/* <Todos
-          todo={this.props}
-          onToggle={this.onToggle}
-          // onDelete={this.onDelete}
-        /> */}
       </div>
     );
   }

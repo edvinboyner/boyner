@@ -14,6 +14,16 @@ const todoReducer = (state = initState, action) => {
       return state;
     case "DELETE_TODO":
       console.log("Deleted todo item: ", action.todo);
+      return state;
+    case "DELETE_TODO_ERROR":
+      console.log("Deleted todo error: ", action.err);
+      return state;
+    case "TOGGLE_TODO":
+      console.log("Toggle todo item: ", action.todo);
+      return state;
+    case "TOGGLE_TODO_ERROR":
+      console.log("Toggle todo error: ", action.err);
+      return state;
     default:
       return state;
   }

@@ -28,7 +28,7 @@ export const createTodo = todo => {
     // We'll make async call to the database
 
     const fireStore = getFirestore(); //This gives us a reference to our firestore database
-    console.log("Inside todoActions createTodo- todo: ", todo);
+    // console.log("Inside todoActions createTodo- todo: ", todo);
     fireStore
       .collection("todos")
       .add({
@@ -50,9 +50,9 @@ export default createTodo;
 export const deleteTodo = todo => {
   return (dispatch, getState, { getFirestore }) => {
     // We'll make async call to the database
-    console.log("todoActions ", todo);
+
     const fireStore = getFirestore(); //This gives us a reference to our firestore database
-    console.log("Inside todoActions deleteTodo- todo: ", todo);
+    // console.log("Inside todoActions deleteTodo- todo: ", todo);
     fireStore
       .collection("todos")
       .doc(todo)
@@ -62,7 +62,7 @@ export const deleteTodo = todo => {
         dispatch({ type: "DELETE_TODO", todo: todo });
       })
       .catch(err => {
-        dispatch({ type: "CREATE_TODO_ERROR", err });
+        dispatch({ type: "DELETE_TODO_ERROR", err });
       });
   };
 };
@@ -72,10 +72,9 @@ export const toggleTodo = todo => {
     // We'll make async call to the database
     // console.log("Now we are inside ToggleTodo ", this.props);
     const fireStore = getFirestore(); //This gives us a reference to our firestore database
-    console.log("Inside todoActions toggleTodo- todo: ", todo);
+    // console.log("Inside todoActions toggleTodo- todo: ", todo);
     const doc = fireStore.get({ collection: "todos" });
-    console.log("DOC: ", doc);
-    console.log("Firestore: ", fireStore.collection("todos").doc(todo));
+
     //
 
     fireStore
@@ -87,21 +86,11 @@ export const toggleTodo = todo => {
           .collection("todos")
           .doc(todo)
           .update({ completed: !doc.data().completed });
-        console.log("Docca va: ", doc.data());
-        return doc.data();
+        dispatch({ type: "TOGGLE_TODO", todo: todo });
+      })
+      .catch(err => {
+        dispatch({ type: "TOGGLE_TODO_ERROR", err });
       });
-
-    // fireStore
-    //   .collection("todos")
-    //   .doc(todo)
-    //   .update({ completed: false })
-    //   .then(() => {
-    //     // When we done /\ we carry on with the dispatch: (.then() makes sure we are done b4 doing this \/)
-    //     dispatch({ type: "DELETE_TODO", todo: todo });
-    //   })
-    //   .catch(err => {
-    //     dispatch({ type: "CREATE_TODO_ERROR", err });
-    //   });
   };
 };
 /* AddTodo --> skickar state --> todoActions --> dispatchar och tas emot --> todoReducer(kollar vad för action.type o gör något sjukt */
