@@ -5,21 +5,23 @@ import uuid from "../../../node_modules/uuid";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import DeleteTodo from "../Todos/DeleteTodo";
+import TodoItem from "../Todos/TodoItem";
+import ToggleTodos from "../Todos/ToggleTodos";
 
 class TodoPage extends Component {
   render() {
+    console.log(this.props);
     return (
       <div>
         {/* Lets add some props */}
-
         <AddTodo addTodo={this.addTodo} />
-        {/* <DeleteTodo /> */}
-        <Todos
+        {/* <ToggleTodos /> */}
+        <TodoItem />
+        {/* <Todos
           todo={this.props}
           onToggle={this.onToggle}
           // onDelete={this.onDelete}
-        />
+        /> */}
       </div>
     );
   }
@@ -49,9 +51,8 @@ const mapStateToProps = state => {
 vet vad den ska connecta till, vilken data den ska hämta från store. Vi mappar det 
 till våran props objekt här inne (this.props). Så nu har vi tillgång till 
 props.todo i denna component och vi får datan. 
-
-
 */
+
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([

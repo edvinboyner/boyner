@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TodoItem from "../layout/TodoItem";
-import DeleteTodo from "./DeleteTodo";
+import DeleteTodo from "./TodoItem";
 
 class Todos extends Component {
   render() {
@@ -9,8 +9,8 @@ class Todos extends Component {
       this.props &&
       this.props.todo.todos.map(todo => (
         <React.Fragment>
-          <DeleteTodo onDelete={this.props.onDelete} />
-          <TodoItem key={todo.id} todo={todo} onToggle={this.props.onToggle} />
+          {/* <DeleteTodo onDelete={this.props.onDelete} /> */}
+          {/* <TodoItem key={todo.id} todo={todo} onToggle={this.props.onToggle} /> */}
         </React.Fragment>
       ))
     );
